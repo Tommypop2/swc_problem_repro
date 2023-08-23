@@ -1,0 +1,25 @@
+[package]
+name = "swc_problem_repro"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+lto = true
+
+[dependencies]
+wasm-bindgen = { version = "0.2", features = ["enable-interning"] }
+serde = "1"
+swc = "0.264.55"
+swc_core = { version = "0.79", features = [
+    "ecma_plugin_transform",
+    "ecma_utils",
+    "ecma_parser",
+    "ecma_transforms_typescript",
+] }
+
+# .cargo/config defines few alias to build plugin.
+# cargo build-wasi generates wasm-wasi32 binary
+# cargo build-wasm32 generates wasm32-unknown-unknown binary.
